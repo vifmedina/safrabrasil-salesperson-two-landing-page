@@ -1,0 +1,294 @@
+:root {
+  --soil-1: #1c130d;
+  --soil-2: #2b1c12;
+  --wheat: #d9a73b;
+  --wheat-light: #f0d38a;
+  --cream: #f3ead9;
+  --cream-dim: #cfc0a4;
+  --rust: #b5622a;
+  --ink: #1b120c;
+  --line: rgba(243, 234, 217, 0.14);
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Work Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--soil-1);
+}
+
+body {
+  background: radial-gradient(120% 90% at 50% -10%, var(--soil-2) 0%, var(--soil-1) 60%);
+  color: var(--cream);
+  font-family: var(--font-body);
+}
+
+.stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh; /* usa a altura visível real em navegadores mobile */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 5vh, 3.5rem) clamp(1rem, 5vw, 1.5rem) 0;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vh, 3rem);
+}
+
+/* textura sutil de grão sobre o fundo */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+.glow {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  max-width: 1100px;
+  aspect-ratio: 1.6 / 1;
+  background: radial-gradient(ellipse at center, rgba(217, 167, 59, 0.28) 0%, rgba(217, 167, 59, 0) 65%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero {
+  text-align: center;
+  flex: none;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(0.62rem, 2vw, 0.72rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wheat-light);
+  opacity: 0.8;
+  margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-size: clamp(2rem, 8vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+}
+
+.brand span {
+  color: var(--wheat);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  width: min(90vw, 460px);
+  max-height: 100%;
+  background: linear-gradient(180deg, rgba(243, 234, 217, 0.06), rgba(243, 234, 217, 0.02));
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: clamp(1.75rem, 5vh, 2.75rem) clamp(1.25rem, 5vw, 2rem) clamp(1.5rem, 4vh, 2.25rem);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.seal {
+  position: absolute;
+  top: clamp(-26px, -4vw, -30px);
+  right: clamp(-8px, -2vw, -14px);
+  width: clamp(56px, 14vw, 74px);
+  height: clamp(56px, 14vw, 74px);
+  transform: rotate(8deg);
+}
+
+.seal-svg { width: 100%; height: 100%; }
+.seal-ring { fill: var(--soil-1); stroke: var(--wheat); stroke-width: 2; }
+.seal-ring-inner { fill: none; stroke: var(--wheat); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.7; }
+.seal-mark { stroke: var(--wheat-light); }
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.row dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 0.5rem;
+}
+
+.row dd {
+  font-family: var(--font-mono);
+  font-size: clamp(0.92rem, 3.4vw, 1.05rem);
+  color: var(--cream);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.divider {
+  height: 1px;
+  background: var(--line);
+}
+
+.cnpj-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.6rem 0.75rem;
+}
+
+.copy-btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--wheat-light);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.copy-btn:hover {
+  background: rgba(217, 167, 59, 0.12);
+  border-color: var(--wheat);
+}
+
+.copy-btn:active {
+  transform: scale(0.92);
+}
+
+.copy-btn:focus-visible,
+.card :focus-visible {
+  outline: 2px solid var(--wheat);
+  outline-offset: 2px;
+}
+
+.toast {
+  position: absolute;
+  right: 1.5rem;
+  bottom: -2.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--soil-1);
+  background: var(--wheat-light);
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* campo de trigo animado no rodapé */
+.field {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 100%;
+  height: clamp(64px, 15vh, 130px);
+  overflow: hidden;
+}
+
+.field-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.horizon {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.stalks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  height: 90px;
+}
+
+.stalk {
+  width: 2px;
+  height: var(--h, 60px);
+  background: linear-gradient(180deg, var(--wheat-light), var(--rust) 120%);
+  border-radius: 2px 2px 0 0;
+  transform-origin: bottom center;
+  animation: sway 3.6s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+  opacity: 0.85;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@media (max-width: 380px) {
+  .row dd { font-size: 0.85rem; }
+  .copy-btn { width: 26px; height: 26px; }
+}
+
+@media (max-height: 640px) {
+  .field { height: clamp(48px, 12vh, 90px); }
+  .brand { font-size: clamp(1.8rem, 8vw, 5.2rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stalk { animation: none; }
+}
